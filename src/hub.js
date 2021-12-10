@@ -45,10 +45,6 @@ import "networked-aframe/src/index";
 import "aframe-rounded";
 import "webrtc-adapter";
 import "aframe-slice9-component";
-import "./utils/threejs-positional-audio-updatematrixworld";
-import "./utils/threejs-world-update";
-import "./utils/threejs-patches";
-import patchThreeAllocations from "./utils/threejs-allocation-patches";
 import { detectOS, detect } from "detect-browser";
 import {
   getReticulumFetchUrl,
@@ -271,6 +267,7 @@ let isOAuthModal = false;
 if (window.opener && window.opener.doingTwitterOAuth) {
   window.opener.postMessage("oauth-successful");
   isOAuthModal = true;
+  window.close();
 }
 
 const isBotMode = qsTruthy("bot");
@@ -744,7 +741,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const onSceneLoaded = () => {
     const physicsSystem = scene.systems["hubs-systems"].physicsSystem;
     physicsSystem.setDebug(isDebug || physicsSystem.debug);
-    patchThreeAllocations();
   };
   if (scene.hasLoaded) {
     onSceneLoaded();

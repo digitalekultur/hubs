@@ -264,7 +264,7 @@ export default class Store extends EventTarget {
       this._shouldResetAvatarOnInit = true;
       Cookies.remove(OAUTH_FLOW_CREDENTIALS_KEY);
     }
-
+    
     const signOutOnInvalidAuthToken = (() => {
       let previousToken;
       return () => {
